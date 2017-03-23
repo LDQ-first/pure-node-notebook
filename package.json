@@ -1,0 +1,27 @@
+{
+  "name": "pure-node-notebook",
+  "version": "1.0.0",
+  "description": "a note book",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LDQ-first/pure-node-notebook.git"
+  },
+  "keywords": [
+    "note",
+    "book"
+  ],
+  "author": "ldq-forst",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LDQ-first/pure-node-notebook/issues"
+  },
+  "homepage": "https://github.com/LDQ-first/pure-node-notebook#readme",
+  "dependencies": {
+    "axios": "^0.15.3"
+  }
+}
