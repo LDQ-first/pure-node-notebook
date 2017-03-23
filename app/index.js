@@ -3,19 +3,22 @@
 */
 
 const fs = require('fs');
+const path = require('path');
+const staticServer = require('./static-server');
+
 
 class App {
     constructor(){
 
     }
     initServer(){
-        //初始化
-        let _package = require('../package');
         return (request, response) => {
-            //每个请求逻辑
-            fs.readFile('./public/index.html', 'utf8', (error, data) => {
-                response.end(JSON.stringify(_package));
-            })
+            let { url } = request; // 解构赋值 let url = request.url
+            //每个请求逻辑      
+            let body = staticServer(url);
+            response.writeHead(200, 'resolve ok', {'X-powered-by': 'Node.js'})
+            response.end(body);
+                   
         }
     }
 }

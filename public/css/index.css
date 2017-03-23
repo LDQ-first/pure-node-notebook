@@ -1,0 +1,8 @@
+body {
+    background: rgba(0, 122, 204, 0.5);
+}
+
+.portrait {
+    display: inline-block;
+    width: 150px;
+}
