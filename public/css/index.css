@@ -1,8 +1,43 @@
 body {
+    margin: 0;
     background: rgba(0, 122, 204, 0.5);
+}
+
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+
+
+.nav {
+    background: #E06E00;
+    padding: 10px 0;
+}
+
+.nav a{
+    display: inline-block;
+    margin-right: -4px;
+    width: 20%;
+    text-align: center;
 }
 
 .portrait {
     display: inline-block;
     width: 150px;
+}
+
+.title {
+    display: inline-block;
+    position: absolute;
+    top: 42px;
+    left: 0;
+    right: 0;
+    text-align: center;
 }

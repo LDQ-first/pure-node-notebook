@@ -10,8 +10,13 @@ let staticFunc = (url) => {
                 if(url == '/'){
                     url = '/index.html'
                 }
+                let map = {
+                    '/': 'index.html',
+                    '/about': '/about.html',
+                    '/list': '/list.html'
+                }
                 let _path = getPath(url);
-                console.log(_path);
+              //  console.log(_path);
                 let body = '';
                 try{
                     body = fs.readFileSync(_path);
