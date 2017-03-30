@@ -5,25 +5,25 @@ const fs = require('fs');
 const path = require('path');
 
 //DRY
-let getPath = url=> path.resolve(process.cwd(), 'public', `.${url}`);
+let getPath = url => path.resolve(process.cwd(), 'public', `.${url}`);
 let staticFunc = (url) => {
-                if(url == '/'){
-                    url = '/index.html'
-                }
-                let map = {
-                    '/': 'index.html',
-                    '/about': '/about.html',
-                    '/list': '/list.html'
-                }
-                let _path = getPath(url);
-              //  console.log(_path);
-                let body = '';
-                try{
-                    body = fs.readFileSync(_path);
-                }
-                catch(err){
-                    body = `NOT FOUND ${err.stack}`
-                }
-                return body;
-            };
+    return new Promise((resolve, reject) => {
+        if (url == '/') {
+            url = '/index.html'
+        }
+        let map = {
+            '/': 'index.html',
+            '/about': '/about.html',
+            '/list': '/list.html'
+        }
+        let _path = getPath(url);
+        //  console.log(_path);
+        let body = fs.readFile(_path, (err, data) => {
+            if (err) {
+                reject(`NOT FOUND ${err.stack}`);
+            }
+            resolve(data);
+        });
+    });
+};
 module.exports = staticFunc
