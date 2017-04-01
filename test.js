@@ -37,7 +37,7 @@ setTimeout(() => {
 p.catch(val => console.log(`catch val is ${val}`))
 p.catch(val => console.log(`catch val is ${val}`))*/
 
-var t = Promise.resolve(1);
+/*var t = Promise.resolve(1);
 var another = Promise.resolve({
     then: function(resolve,reject){
         reject(2);
@@ -45,4 +45,22 @@ var another = Promise.resolve({
 });
 //another.then(val => console.log(val));
 another.catch(val => console.log(val));
-console.log(another);
+console.log(another);*/
+
+
+const assert = require('assert');
+
+const p = Promise.resolve(1);
+
+const p1 = p.then(val => {
+    console.log(val);
+    return val+1;
+});
+
+console.log(p1 instanceof Promise);
+
+const p2 = p1.then(val => {
+    console.log(val);
+    assert.equal(val, 3);
+})
+

@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const staticServer = require('./static-server');
 const apiServer = require('./api');
+const urlParser = require('./url-parser');
 
 class App {
     constructor() {
@@ -13,31 +14,39 @@ class App {
     }
     initServer() {
         return (request, response) => {
-            let { url } = request; // 解构赋值 let url = request.url
+            let { url, method } = request; // 解构赋值 let url = request.url
             //每个请求逻辑      
             //DRY
-            //返回的字符串或者Buffer
-            let body = '';
-            //响应头
-            let headers = {};
-            if (url.match('action')) {
-                apiServer(url).then(val => {
-                    body = JSON.stringify(val);
-                    headers = {
-                        'Content-Type': 'application/json'
+            request.context = {
+                body: '',
+                query: {},
+                method: 'get'
+            };
+            urlParser(request).then(() => {
+                return apiServer(request).then(val => {
+                    if (!val) {
+                        return staticServer(request);
                     }
-                    let fianlHeader = Object.assign(headers, { 'X-powered-by': 'Node.js' });
-                    response.writeHead(200, 'resolve ok', fianlHeader);
+                    else {
+                        return val
+                    }
+                }).then(val => {
+                    let base = { 'X-powered-by': 'Node.js' };
+                    let body = '';
+                    //返回的字符串或者Buffer
+                    if (val instanceof Buffer) {
+                        body = val;
+                    }
+                    else {
+                        body = JSON.stringify(val);
+                        let fianlHeader = Object.assign(base, {
+                            'Content-Type': 'application/json'
+                        });
+                        response.writeHead(200, 'resolve ok', fianlHeader);
+                    }
                     response.end(body);
                 })
-            }
-            else {
-                staticServer(url).then((body) => {
-                    let fianlHeader = Object.assign(headers, { 'X-powered-by': 'Node.js' });
-                    response.writeHead(200, 'resolve ok', fianlHeader);
-                    response.end(body);
-                });
-            }
+            });
         }
     }
 }

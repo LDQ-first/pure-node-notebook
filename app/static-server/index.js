@@ -6,7 +6,8 @@ const path = require('path');
 
 //DRY
 let getPath = url => path.resolve(process.cwd(), 'public', `.${url}`);
-let staticFunc = (url) => {
+let staticFunc = (request) => {
+    let {url} = request;
     return new Promise((resolve, reject) => {
         if (url == '/') {
             url = '/index.html'

@@ -18,7 +18,13 @@ setTimeout(function(){
     })
     $.ajax({
         url: '/list.action',
-        method: 'get',
+        method: 'post',
+        headers: {
+            'content-type': 'application/json'
+        },
+        data: JSON.stringify([
+            'name', 'ldq'
+        ]),
         success: function(arr){
             console.log(arr);
             var liStr = arr.map(function(ele){
