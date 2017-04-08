@@ -64,6 +64,8 @@ class App {
                 },
                 res: response,
                 resCtx: {
+                    statusCode: 200, //状态码
+                    statusMessage: 'resolve ok',
                     headers: {}, //response的返回报文
                     body: '', //返回给前端的内容区
                 }
@@ -75,9 +77,12 @@ class App {
             //函数体可以百年不变
             this.composeMiddleware(context).then( () => {
                 let base = { 'X-powered-by': 'Node.js' };
-                let {body, headers} = context.resCtx;
+                let {body, headers, statusCode, statusMessage} = context.resCtx;
                 //返回的字符串或者Buffer
-                response.writeHead(200, 'resolve ok',
+
+                
+
+                response.writeHead(statusCode, statusMessage,
                     Object.assign(base, headers));
                 response.end(body);
             })
