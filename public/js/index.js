@@ -1,4 +1,6 @@
 
+require('../css/index.scss');
+require('highlight.js').initHighlightingOnLoad();
 
 setTimeout(function(){
     $.ajax({

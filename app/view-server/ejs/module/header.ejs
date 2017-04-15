@@ -1,30 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="" href="./css/index.css">
-    <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <!--<link rel="stylesheet" type="" href="./css/index.css">-->
+    <link rel="stylesheet" href="/dist/common.css">
+    <link rel="stylesheet" href="/dist/index.css">
+    <!--<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>-->
 </head>
-<body>
-<div class="header">
-    <div class="avatar">
-        <img src="" alt="">
-    </div>
-    <ul class="nav">
-        <li>
-            <a href="/">首页</a>
-        </li>
-        <li>
-            <a href="/about">关于</a>
-        </li>
-        <li>
-            <a href="/list">博客列表</a>
-        </li>
-        <li>
-            <a href="/write">列表</a>
-        </li>
 
-    </ul>
-</div>
+<body>
+    <div class="left-col">
+        <header>
+            <div id="header">
+                <a href="/" class="avatar">
+                    <img src="./img/001.jpg" alt="">
+                </a>
+                <h1 class="header-author">
+                    <a href="/">ldq</a>
+                </h1>
+                <p class="header-subtitle">前端</p>
+                <form class="search">
+                    <label for="search">搜索</label>
+                    <input type="text" name="q" value="" id="search" autocomplete="off" 
+                    placeholder="搜索">
+                    <input type="hidden" name="q" value="">
+                </form>
+                <ul class="nav">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                    <li>
+                        <a href="/about">关于</a>
+                    </li>
+                    <li>
+                        <a href="/list">博客列表</a>
+                    </li>
+                    <% if(hasUser){%>
+                    <li>
+                        <a href="/write">写博客</a>
+                    </li>
+                    <% }%>
+                </ul>
+            </div>
+        </header>
+    </div>

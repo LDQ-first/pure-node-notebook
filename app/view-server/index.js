@@ -17,6 +17,7 @@ module.exports = (ctx) => {
     let { url } = req;
     return Promise.resolve({
         then: (resolve, reject) => {
+            //过滤(只有html才做重定向)
             if (url.match('action') || url.match(/\./)) {
                 resolve()
             }
@@ -26,18 +27,19 @@ module.exports = (ctx) => {
 
                 if (ejsName) {
                     let layoutPath = path.resolve(viewPath, 'layout.ejs');
-                    let layoutHtml = fs.readFileSync(layoutPath, 'utf-8');
+                    let layoutHtml = fs.readFileSync(layoutPath, 'utf8');
                     let render = ejs.compile(layoutHtml, {
                         compileDebug: true,
                         filename: layoutPath
                     });
                     
-                    let htmlPath = path.resolve(viewPath, ejsName + 'ejs');
+                    let htmlPath = path.resolve(viewPath, ejsName + '.ejs');
                     
 
             
                     let html = render({
-                        templateName: ejsName
+                        templateName: ejsName,
+                        hasUser: resCtx.hasUser
                     })
 
                     resCtx.headers = Object.assign(resCtx.headers, {

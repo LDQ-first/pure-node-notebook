@@ -64,6 +64,8 @@ class App {
                 },
                 res: response,
                 resCtx: {
+                    //用来表示用户
+                    hasUser: false,
                     statusCode: 200, //状态码
                     statusMessage: 'resolve ok',
                     headers: {}, //response的返回报文
@@ -79,9 +81,6 @@ class App {
                 let base = { 'X-powered-by': 'Node.js' };
                 let {body, headers, statusCode, statusMessage} = context.resCtx;
                 //返回的字符串或者Buffer
-
-                
-
                 response.writeHead(statusCode, statusMessage,
                     Object.assign(base, headers));
                 response.end(body);
