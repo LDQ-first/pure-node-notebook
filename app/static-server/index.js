@@ -5,12 +5,12 @@ const fs = require('fs');
 const path = require('path');
 const mime = require('mime');
 //DRY
-let getPath = url => path.resolve(process.cwd(), 'public', `.${url}`);
+let getPath = pathname => path.resolve(process.cwd(), 'public', `.${pathname}`);
 let staticFunc = (ctx) => {
-    let {url} = ctx.req;
+    let {pathname} = ctx.reqCtx;
     let {resCtx } = ctx;
     return new Promise((resolve, reject) => {
-        if(url.match(/\./) && !url.match('action')) { 
+        if(pathname.match(/\./) && !pathname.match('action')) { 
             /*if (url == '/') {
                 url = '/index.html'
             }*/
@@ -19,7 +19,7 @@ let staticFunc = (ctx) => {
                 '/about': '/about.html',
                 '/list': '/list.html'
             }*/
-            let _path = getPath(url);
+            let _path = getPath(pathname);
             resCtx.headers = Object.assign(resCtx.headers, {
                 'Content-Type': mime.lookup(_path)
             })

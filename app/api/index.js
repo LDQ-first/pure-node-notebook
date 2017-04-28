@@ -1,9 +1,11 @@
 /*
 * api server
 */
+let Router = require('./router');
+require('./ajax.js');
 
 module.exports = (ctx) => {
-    let { url, method } = ctx.req;
+    let { pathname, method } = ctx.reqCtx;
     let { resCtx, reqCtx } = ctx;
     let { res } = ctx;
 
@@ -11,12 +13,12 @@ module.exports = (ctx) => {
         '/list.action': ['流星', '烟花', 'node'],
         '/user.action': ['ldq', '10086', 'share']
     }
-    method = method.toLowerCase();
+   // method = method.toLowerCase();
     return Promise.resolve({
         then: (resolve, reject) => {
-            if (url.match('action')) {
+            if (pathname.match('action')) {
                 if (method === 'get') {
-                    resCtx.body = JSON.stringify(apiMap[url]);
+                    resCtx.body = JSON.stringify(apiMap[pathname]);
                 }
                 else {
                     let {body} = reqCtx;
