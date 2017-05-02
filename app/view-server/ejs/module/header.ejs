@@ -1,49 +1,57 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta content="slashhuang的技术博客,技术博客" name="keywords">
+    <meta content="slashhuang的技术博客" name="description">
+    <meta name="viewport" charset="UTF-8" content="user-scalable=no" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Document</title>
-    <!--<link rel="stylesheet" type="" href="./css/index.css">-->
+    <meta name="baidu-tc-verification" content="de5877bb8a9756ef3aa8217110e60ef2" />
+    <title>slashhuang的技术博客</title>
     <link rel="stylesheet" href="/dist/common.css">
-    <link rel="stylesheet" href="/dist/index.css">
-    <!--<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>-->
+    <link rel="stylesheet" href="/dist/<%- viewName%>.css">
 </head>
-
 <body>
-    <div class="left-col">
-        <header>
-            <div id="header">
-                <a href="/" class="avatar">
-                    <img src="./img/001.jpg" alt="">
-                </a>
-                <h1 class="header-author">
-                    <a href="/">ldq</a>
-                </h1>
-                <p class="header-subtitle">前端</p>
-                <form class="search">
-                    <label for="search">搜索</label>
-                    <input type="text" name="q" value="" id="search" autocomplete="off" 
-                    placeholder="搜索">
-                    <input type="hidden" name="q" value="">
-                </form>
-                <ul class="nav">
-                    <li>
-                        <a href="/">首页</a>
-                    </li>
-                    <li>
-                        <a href="/about">关于</a>
-                    </li>
-                    <li>
-                        <a href="/list">博客列表</a>
-                    </li>
-                    <% if(hasUser){%>
-                    <li>
-                        <a href="/write">写博客</a>
-                    </li>
-                    <% }%>
-                </ul>
-            </div>
-        </header>
-    </div>
+<div class='header clear-fix'>
+	<img class='avatar' src='/img/avatar.jpeg' />
+	<ul class='nav'>
+		<li>
+			<a href='/'>首页</a>
+		</li>
+		<li>
+			<a href='/about'>关于</a>
+		</li>
+		<li>
+			<a href='/list'>博客列表</a>
+		</li>
+		<%if(hasUser){%>
+		<li>
+			<a href='/manage'>管理博客</a>
+		</li>
+		<li>
+			<a href='/logout'>登出</a>
+		</li>
+		<% }%>
+		<li>
+			<form class="search"
+				 action="//google.com/search" method="get" accept-charset="utf-8">
+					<a>搜索</a>
+					<input type="search" id="search" name="q"
+							autocomplete="off" maxlength="20" placeholder="搜索">
+					<input type="hidden" name="q" value="site:slashhuang.github.io">
+			</form>
+		</li>
+	</ul>
+</div>
+<script type="text/javascript">
+    Object.defineProperty(window, 'hasUser', {
+        configurable:false,
+        enumerable:false,
+        value:<%- hasUser%>,
+        writable:false
+    })
+</script>
+
+
+
