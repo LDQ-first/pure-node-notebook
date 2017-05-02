@@ -1,13 +1,13 @@
 
 
 
-<%- include('./module/header') %>
-
-<div id="content">
-    <%- include(templateName)%>
+<%- include('./module/header')  %>
+<div class='main-module'>
+	<div id="mod-<%- viewName%>"></div>
 </div>
+<%- include('./module/footer')  %>
 
-
-<%- include('./module/footer') %>
+<script src="/dist/common.js"></script>
+<script src="/dist/<%- viewName %>.js"></script>
 
 
