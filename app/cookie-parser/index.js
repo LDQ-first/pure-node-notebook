@@ -2,8 +2,8 @@
  * 处理cookie
  */
 const cookie_parser = require('cookie');
-/*//设置白名单
-const whiteNameList=['/ldq'];*/
+//设置白名单
+const whiteNameList=['/ldq'];
 module.exports = (ctx)=>{
 	let { pathname } = ctx.reqCtx;
 	let { cookie } = ctx.req.headers;
@@ -17,8 +17,8 @@ module.exports = (ctx)=>{
 				resCtx.hasUser = true;
 				res.setHeader('Set-Cookie',cookieStr(3600))
 			}
-			//设置白名单
-			const whiteNameList=['/ldq'];
+			/*//设置白名单
+			const whiteNameList=['/ldq'];*/
 			//登录
 			if(whiteNameList.indexOf(pathname)>-1){
 				console.log(whiteNameList);
