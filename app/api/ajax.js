@@ -3,22 +3,41 @@
 */
 let Router = require('./router');
 
-let { $_saveBlog, $_saveCategory } = require('./mongo');
+let { $_saveBlog,
+     $_saveCategory,
+     $_getCategoryLlist,
+     $_getBlogDetail,
+     $_getBlogList,
+     $_deleteBlog } = require('./mongo');
 
 //获取分类列表
 Router.get('/categoryList.action', ctx => { 
-
+     return $_getCategoryLlist();
 });
 //增加分类
-Router.get('/category.action', ctx => { 
-    let category = ctx.reqCtx.query;
+Router.post('/category.action', ctx => { 
+    let category = ctx.reqCtx.body;
     return $_saveCategory(category);
 });
 //添加博客
 Router.post('/blog.action', ctx => { 
-    let blog = ctx.reCqtx.body;
+    let blog = ctx.reqCtx.body;
     return $_saveBlog(blog);
 });
-
+//添加博客详情页
+Router.get('/blogDetail.action', ctx => {
+    let {query} = ctx.reqCtx; 
+    return $_getBlogDetail(query);
+})
+//获取博客列表
+Router.get('/blogList.action', ctx => {
+    let {query} = ctx.reqCtx; 
+    return $_getBlogList(query);
+})
+//删除博客
+Router.post('/deleteBlog.action', ctx => {
+    let { body } = ctx.reqCtx;
+    return $_deleteBlog(body);
+})
 
 module.exports = Router;

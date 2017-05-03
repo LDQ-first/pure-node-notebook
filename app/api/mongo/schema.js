@@ -16,11 +16,9 @@ const blogSchema = new Schema({
   content:   String, //html
   rawContent: String, //markdown
   category: categorySchema,//分类
-  date: { type: String, default: ()=>{
-  	return new Date().toLocaleString()
-  }}	
+  date: String
 },{
-    _id:false, //===>_id为false 告诉mongoose
+    _id:false, //===>_id为false 告诉mongoose不要去操作_id
     //http://mongoosejs.com/docs/guide.html#strict
     strict: false
 });

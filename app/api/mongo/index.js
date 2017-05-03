@@ -10,12 +10,14 @@ const { blogSchema,categorySchema } = require('./schema');
 const BlogModel = mongoose.model('Blog', blogSchema);
 const CategoryModel = mongoose.model('Category',categorySchema);
 
-const $_saveBlog = blog => {
-    return BlogModel.findOneAndUpdate({title:blog.title},blog,{
+exports.$_saveBlog = blog => {
+	//upsert ===> update + insert
+	let condition = {title: blog.title};
+	blog.date = new Date().toLocaleString();
+    return BlogModel.findOneAndUpdate(condition, blog, {
         upsert:true,
 		new: true
-     }).exec()
-       .then(_blog=>{
+     }).then(_blog=>{
 		return {
 			status:1,
 			data:_blog
@@ -23,8 +25,7 @@ const $_saveBlog = blog => {
 	})
 }
 
-const $_saveCategory = category => {
-    console.log(category);
+exports.$_saveCategory = category => {
     return CategoryModel.findOneAndUpdate({
 		name: category.name
 	},category,{
@@ -42,7 +43,49 @@ const $_saveCategory = category => {
 	})
 }
 
-module.exports = {
-    $_saveBlog,
-	$_saveCategory 
+exports.$_getCategoryLlist = query => {
+	//collection + document的样子
+	return CategoryModel.find(query).exec().then(categoryList => {
+		return {
+			status: 1,
+			data: categoryList || []
+		}
+	})
+}
+
+exports.$_getBlogDetail = query => {
+	let condition = {
+		_id: mongoose.Types.ObjectId(query.id)
+	}
+	//_id ==> objectId
+	return BlogModel.findOne(condition)
+		.then(blog => {
+			return {
+				status: 1,
+				data: blog
+			}
+		})
+}
+
+exports.$_getBlogList = query => {
+	return BlogModel.find(query).exec()
+		.then(blogList => {
+			return {
+				status: 1,
+				data: blogList
+			}
+		})
+}
+
+exports.$_deleteBlog = query => {
+	let condition = {
+		_id: mongoose.Types.ObjectId(query.id)
+	}
+	return BlogModel.remove(condition).exec()
+		.then(blog => {
+			return {
+				status: 1,
+				data: '删除博客成功'
+			}
+		})
 }
