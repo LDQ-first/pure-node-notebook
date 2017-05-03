@@ -65,7 +65,7 @@ class App {
                 res: response,
                 resCtx: {
                     //用来表示用户
-                    hasUser: false,
+                    hasUser:false,
                     statusCode: 200, //状态码
                     statusMessage: 'resolve ok',
                     headers: {}, //response的返回报文

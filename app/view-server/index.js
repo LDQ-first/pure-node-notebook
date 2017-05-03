@@ -33,7 +33,7 @@ module.exports = (ctx) => {
                         filename: layoutPath
                     });
                     
-                    let htmlPath = path.resolve(viewPath, ejsName + '.ejs');
+                   // let htmlPath = path.resolve(viewPath, ejsName + '.ejs');
                     
 
             

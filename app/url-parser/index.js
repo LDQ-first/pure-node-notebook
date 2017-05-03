@@ -17,7 +17,6 @@ module.exports = (ctx) => {
 	index.html?a=1 ==> query:{a:1}
 	*/
     Object.assign(reqCtx, Url.parse(url, true), {method});
-
     
     return Promise.resolve({
         then: (resolve, reject) => {
